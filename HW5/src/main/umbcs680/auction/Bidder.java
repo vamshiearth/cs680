@@ -1,19 +1,21 @@
 package umbcs680.auction;
 
-public class Bidder implements BidObserver, AuctionEndObserver {
+public class Bidder implements Observer<String> { // Specify String as the type for Observer
     private final String name;
+    private String lastMessage; // To track the last received message
 
     public Bidder(String name) {
         this.name = name;
     }
 
     @Override
-    public void updateBid(BidEvent event) {
-        System.out.println(name + " received bid update: " + event.getBidAmount());
+    public void update(Observable<String> sender, String message) {
+        lastMessage = message; // Ensure this correctly updates the message
+        System.out.println(name + " received update: " + message);
     }
 
-    @Override
-    public void updateAuctionEnd(AuctionEndEvent event) {
-        System.out.println(name + " received auction end notification: " + event.getWinningBid());
+
+    public String getLastMessage() {
+        return lastMessage;
     }
 }
