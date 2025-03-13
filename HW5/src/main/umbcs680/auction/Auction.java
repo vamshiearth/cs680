@@ -1,7 +1,5 @@
 package umbcs680.auction;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class Auction {
     private final String item;
