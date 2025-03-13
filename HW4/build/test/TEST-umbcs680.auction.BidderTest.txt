@@ -1,9 +1,0 @@
-Testcase: umbcs680.auction.BidderTest
-Test: testGetLastMessage() took 7 milli sec(s)
-Test: testUpdate() took 0 milli sec(s)
-Tests run: 2, Failures: 0, Skipped: 0, Aborted: 0, Time elapsed: 7 milli sec(s)
-------------- Standard Output ---------------
-Hank received update: Test message
-DEBUG: Last message is -> Test message
-Grace received update: New highest bid of 150.0 on Bike
-------------- ---------------- ---------------
