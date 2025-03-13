@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Auction {
-    private List<AuctionBidObserver> bidObservers = new ArrayList<>();
-    private List<AuctionEndObserver> endObservers = new ArrayList<>();
     private final String item;
     private double highestBid;
 
@@ -17,33 +15,18 @@ public class Auction {
     public void placeBid(double bid) {
         if (bid > highestBid) {
             highestBid = bid;
-            notifyBidObservers(new AuctionBidEvent(item, highestBid));
+            MulticastManager.notifyBidObservers(this, new AuctionBidEvent(item, highestBid));
         } else {
-            notifyBidObservers(new AuctionBidEvent(item, -1)); // Indicates a failed bid
+            MulticastManager.notifyBidObservers(this, new AuctionBidEvent(item, -1));
         }
     }
 
     public void endAuction() {
-        notifyEndObservers(new AuctionEndEvent(item, highestBid));
+        MulticastManager.notifyEndObservers(this, new AuctionEndEvent(item, highestBid));
     }
 
-    public void addBidObserver(AuctionBidObserver observer) {
-        bidObservers.add(observer);
-    }
-
-    public void addEndObserver(AuctionEndObserver observer) {
-        endObservers.add(observer);
-    }
-
-    private void notifyBidObservers(AuctionBidEvent event) {
-        for (AuctionBidObserver ob : bidObservers) {
-            ob.updateBid(event);
-        }
-    }
-
-    private void notifyEndObservers(AuctionEndEvent event) {
-        for (AuctionEndObserver ob : endObservers) {
-            ob.updateEnd(event);
-        }
+    public String getItem() {
+        return item;
     }
 }
+
