@@ -1,25 +1,23 @@
 package umbcs680.auction;
 
-public class Bidder {
+public class Bidder implements AuctionBidObserver, AuctionEndObserver {
     private final String name;
 
     public Bidder(String name) {
         this.name = name;
     }
 
-    public void subscribeToAuction(Auction auction) {
-        MulticastManager.subscribe(auction, this);
+    @Override
+    public void updateBid(AuctionBidEvent event) {
+        if (event.getBidAmount() > 0) {
+            System.out.println(name + " received bid update: Highest bid on " + event.getItem() + " is $" + event.getBidAmount());
+        } else {
+            System.out.println(name + " received bid update: Bid failed on " + event.getItem());
+        }
     }
 
-    public void unsubscribeFromAuction(Auction auction) {
-        MulticastManager.unsubscribe(auction, this);
-    }
-
-    public void update(Auction auction, String message) {
-        System.out.println(name + " received update from " + auction.getItem() + ": " + message);
-    }
-
-    public String getName() {
-        return name;
+    @Override
+    public void updateEnd(AuctionEndEvent event) {
+        System.out.println(name + " received auction end update: " + event.getItem() + " sold for $" + event.getHighestBid());
     }
 }
