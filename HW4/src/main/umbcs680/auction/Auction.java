@@ -1,8 +1,5 @@
 package umbcs680.auction;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Auction extends Observable<String> { // Auction extends Observable
     private final String item;
     private double highestBid;

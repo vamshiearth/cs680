@@ -1,29 +1,42 @@
-# Auction System Application
+# Auction System - Observer Pattern
 
 ## Overview
+This project implements an **Auction System** using the **Observer Pattern**.
+It allows multiple bidders to receive updates when the auction state changes.
 
-This Auction System Application demonstrates the use of the Observer design pattern. In this system, bidders can
-subscribe to receive notifications about updates related to an auction item, such as new bids and auction completion.
+## Steps to Understand the Code
 
-## Components
+### 1. **Auction (Observable)**
+- The `Auction` class represents an auction for an item.
+- It extends `Observable<String>`, meaning it can notify bidders (observers) when a new bid is placed.
+- When a bid is placed or the auction ends, all subscribed bidders receive updates.
 
-1. **Auction**: This class acts as the observable (or subject) that maintains a list of observers (bidders) and notifies
- them of any changes in the auction status.
+### 2. **Bidder (Observer)**
+- The `Bidder` class represents a participant in the auction.
+- It implements `Observer<String>`, meaning it listens for auction updates.
+- When notified, it prints a message indicating it received an update.
 
-2. **Bidder**: This class implements the observer interface. Each bidder receives notifications from the auction
-regarding the current bid status and any relevant messages.
+### 3. **Observable (Publisher)**
+- This is an abstract class that manages a **list of observers**.
+- It provides methods for:
+  - Adding observers (`addObserver()`)
+  - Removing observers (`removeObserver()`)
+  - Notifying observers when the state changes (`notifyObservers()`)
 
-3. **Observer Interface**: Defines the method that observers (bidders) must implement to receive updates from the
-observable (auction).
+### 4. **Observer Interface (Subscriber)**
+- This interface ensures that all observers **implement the `update()` method**.
+- The `Bidder` class implements this interface.
 
-4. **Observable Interface**: Defines methods for adding, removing, and notifying observers.
+## How It Works (Example Flow)
+1. **Create an Auction** for an item.
+2. **Create multiple Bidders** and register them using `addObserver()`.
+3. **Place bids on the auction**:
+   - If the bid is higher than the current highest bid, it updates and notifies all bidders.
+   - If the bid is too low, bidders receive a notification that the bid was rejected.
+4. **End the auction** and notify all bidders of the final price.
 
-## Implementation of the Observer Pattern
 
-- The `Auction` class uses the Observer pattern to notify all registered bidders when a new bid is placed or when the
-auction ends.
-- Bidders can register themselves with the auction using the `addObserver` method and will receive notifications
-through the `update` method when the auction changes state.
-- This pattern allows for a clear separation of concerns, where the auction logic is decoupled from the bidder
-notification logic, enhancing maintainability and scalability.
+## Conclusion
+This project follows the **Observer Pattern**, allowing an auction to notify multiple bidders about bid updates and
+auction completion. This ensures an efficient **publish-subscribe system** where bidders receive real-time updates.
 
