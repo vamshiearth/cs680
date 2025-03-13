@@ -12,7 +12,7 @@ public class Auction extends Observable<String> { // Auction extends Observable
     public void placeBid(double bid) {
         if (bid > highestBid) {
             highestBid = bid;
-            super.notifyObservers("New highest bid of " + highestBid + " on " + item); // ✅ Use Observable’s notifyObservers
+            super.notifyObservers("New highest bid of " + highestBid + " on " + item); // Use Observable’s notifyObservers
         } else {
             super.notifyObservers("Bid of " + bid + " is too low for " + item);
         }
