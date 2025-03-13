@@ -1,5 +1,8 @@
 package umbcs680.auction;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Auction {
     private List<AuctionBidObserver> bidObservers = new ArrayList<>();
     private List<AuctionEndObserver> endObservers = new ArrayList<>();
