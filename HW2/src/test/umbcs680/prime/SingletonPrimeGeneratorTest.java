@@ -111,4 +111,14 @@ class SingletonPrimeGeneratorTest {
         });
         assertEquals("Invalid range between 100 1", exception3.getMessage(), "Expected exception message for [100, 1].");
     }
+
+    @Test
+    void testStringEqualityAndIdentity() {
+        String expected = "prime";
+        String actual = "prime".substring(0, 5);
+
+        assertEquals(expected, actual); // Should PASS
+        assertSame(expected, actual); // Should FAIL, because actual is a new String instance
+    }
+
 }
