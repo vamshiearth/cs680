@@ -7,6 +7,16 @@ public class Bidder implements AuctionBidObserver, AuctionEndObserver {
         this.name = name;
     }
 
+    public void subscribeToAuction(Auction auction) {
+        MulticastManager.subscribeToBids(auction, this);
+        MulticastManager.subscribeToAuctionEnd(auction, this);
+    }
+
+    public void unsubscribeFromAuction(Auction auction) {
+        MulticastManager.unsubscribeFromBids(auction, this);
+        MulticastManager.unsubscribeFromAuctionEnd(auction, this);
+    }
+
     @Override
     public void updateBid(AuctionBidEvent event) {
         if (event.getBidAmount() > 0) {
