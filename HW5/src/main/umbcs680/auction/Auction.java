@@ -1,6 +1,8 @@
 package umbcs680.auction;
 
 public class Auction {
+    private List<AuctionBidObserver> bidObservers = new ArrayList<>();
+    private List<AuctionEndObserver> endObservers = new ArrayList<>();
     private final String item;
     private double highestBid;
 
@@ -9,20 +11,36 @@ public class Auction {
         this.highestBid = 0;
     }
 
-    public void placeBid(Bidder bidder, double bid) {
+    public void placeBid(double bid) {
         if (bid > highestBid) {
             highestBid = bid;
-            MulticastManager.notifyBidders(this, bidder.getName() + " placed the highest bid: $" + highestBid + " on " + item);
+            notifyBidObservers(new AuctionBidEvent(item, highestBid));
         } else {
-            MulticastManager.notifyBidders(this, "Bid of $" + bid + " is too low for " + item);
+            notifyBidObservers(new AuctionBidEvent(item, -1)); // Indicates a failed bid
         }
     }
 
     public void endAuction() {
-        MulticastManager.notifyBidders(this, "Auction for " + item + " has ended. Final bid: $" + highestBid);
+        notifyEndObservers(new AuctionEndEvent(item, highestBid));
     }
 
-    public String getItem() {
-        return item;
+    public void addBidObserver(AuctionBidObserver observer) {
+        bidObservers.add(observer);
+    }
+
+    public void addEndObserver(AuctionEndObserver observer) {
+        endObservers.add(observer);
+    }
+
+    private void notifyBidObservers(AuctionBidEvent event) {
+        for (AuctionBidObserver ob : bidObservers) {
+            ob.updateBid(event);
+        }
+    }
+
+    private void notifyEndObservers(AuctionEndEvent event) {
+        for (AuctionEndObserver ob : endObservers) {
+            ob.updateEnd(event);
+        }
     }
 }
