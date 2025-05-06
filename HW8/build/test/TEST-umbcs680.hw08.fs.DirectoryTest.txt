@@ -1,0 +1,9 @@
+Testcase: umbcs680.hw08.fs.DirectoryTest
+Test: appendChild() took 9 milli sec(s)
+Test: testEqualityCheckImplementationDir() took 2 milli sec(s)
+Test: getTotalSize() took 0 milli sec(s)
+Test: isDirectory() took 0 milli sec(s)
+Test: countChildren() took 1 milli sec(s)
+Test: getSubDirectories() took 0 milli sec(s)
+Test: getFiles() took 0 milli sec(s)
+Tests run: 7, Failures: 0, Skipped: 0, Aborted: 0, Time elapsed: 30 milli sec(s)
