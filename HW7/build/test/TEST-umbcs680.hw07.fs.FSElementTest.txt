@@ -1,7 +1,0 @@
-Testcase: umbcs680.hw07.fs.FSElementTest
-Test: getCreationTime() took 1 milli sec(s)
-Test: getName() took 0 milli sec(s)
-Test: isDirectory() took 0 milli sec(s)
-Test: testGetTotalSize() took 0 milli sec(s)
-Test: getParent() took 1 milli sec(s)
-Tests run: 5, Failures: 0, Skipped: 0, Aborted: 0, Time elapsed: 4 milli sec(s)

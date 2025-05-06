@@ -1,8 +1,0 @@
-Testcase: umbcs680.hw08.fs.FileSystemTest
-Test: testAppendRootDir() took 2 milli sec(s)
-Test: testGetFileSystem() took 2 milli sec(s)
-Test: testFileSize() took 1 milli sec(s)
-Test: testGetRootDirs() took 0 milli sec(s)
-Test: testDirectoryStructure() took 0 milli sec(s)
-Test: testLinkResolution() took 0 milli sec(s)
-Tests run: 6, Failures: 0, Skipped: 0, Aborted: 0, Time elapsed: 9 milli sec(s)
